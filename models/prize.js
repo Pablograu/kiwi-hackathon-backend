@@ -12,6 +12,6 @@ const prizeSchema = new Schema({
 }
 );
 
-const User = mongoose.model('Prize', prizeSchema);
+const Prize = mongoose.model('Prize', prizeSchema);
 
 module.exports = Prize;

@@ -32,3 +32,16 @@ exports.validationLoggin = () => (req, res, next) => {
     next();
   }
 }
+
+exports.validationSignup = () => (req, res, next) => {
+  const { username, password, subscriptionType } = req.body;
+
+  if (!username || !password || !subscriptionType || !email) {
+    const err = new Error('Unprocessable Entity');
+    err.status = 422;
+    err.statusMessage = 'Validation error';
+    next(err)
+  } else {
+    next();
+  }
+}

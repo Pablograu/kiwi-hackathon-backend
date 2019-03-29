@@ -25,7 +25,10 @@ const userSchema = new Schema({
   subscriptionType: {
     type: String,
     enum: ['Basic', 'Standard', 'Premium' ],
-  }
+  },
+  startingPoint: String,
+  selectedContinent: String,
+  discardedCities: [String],
 }
 );
 

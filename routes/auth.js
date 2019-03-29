@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 const User = require('../models/user');
 
-const { isLoggedIn, isNotLoggedIn, validationLoggin } = require('../helpers/middlewares');
+const { isLoggedIn, isNotLoggedIn, validationLoggin, validationSignup } = require('../helpers/middlewares');
 
 router.get('/me', isLoggedIn(), (req, res, next) => {
   res.json(req.session.currentUser);
@@ -36,8 +36,8 @@ router.post('/login', isNotLoggedIn(), validationLoggin(), (req, res, next) => {
     .catch(next);
 });
 
-router.post('/signup', isNotLoggedIn(), validationLoggin(), (req, res, next) => {
-  const { username, password, email } = req.body;
+router.post('/signup', isNotLoggedIn(), validationSignup(), (req, res, next) => {
+  const { username, password, email, subscriptionType, selectedContinent = '', discardedCities = '' } = req.body;
 
   User.findOne({
       username
@@ -57,10 +57,12 @@ router.post('/signup', isNotLoggedIn(), validationLoggin(), (req, res, next) => 
         username,
         email,
         password: hashPass,
+        subscriptionType,
+        selectedContinent,
+        discardedCities,
       });
 
       return newUser.save().then(() => {
-        // TODO delete password 
         req.session.currentUser = newUser;
         res.status(200).json(newUser);
       });
