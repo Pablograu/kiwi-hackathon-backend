@@ -5,7 +5,7 @@ const ObjectId = Schema.Types.ObjectId;
 const prizeSchema = new Schema({
   winner: [{
     type: ObjectId,
-    ref: 'User'
+    ref: 'User',
   }],
   date: Date,
   tripOptions: [String],
