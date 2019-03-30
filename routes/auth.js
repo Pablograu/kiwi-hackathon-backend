@@ -37,7 +37,7 @@ router.post('/login', isNotLoggedIn(), validationLoggin(), (req, res, next) => {
 });
 
 router.post('/signup', isNotLoggedIn(), validationSignup(), (req, res, next) => {
-  const { username, password, email, subscriptionType, selectedContinent = '', discardedCities = '' } = req.body;
+  const { username, password, email, subscriptionType, startingPoint, selectedContinent = '', discardedCities = [] } = req.body;
 
   User.findOne({
       username
@@ -60,7 +60,7 @@ router.post('/signup', isNotLoggedIn(), validationSignup(), (req, res, next) => 
         subscriptionType,
         selectedContinent,
         discardedCities,
-        startingPoint
+        startingPoint,
       });
 
       return newUser.save().then(() => {
