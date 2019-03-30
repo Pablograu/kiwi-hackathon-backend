@@ -60,6 +60,7 @@ router.post('/signup', isNotLoggedIn(), validationSignup(), (req, res, next) => 
         subscriptionType,
         selectedContinent,
         discardedCities,
+        startingPoint
       });
 
       return newUser.save().then(() => {
