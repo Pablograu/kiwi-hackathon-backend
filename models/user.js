@@ -25,7 +25,8 @@ const userSchema = new Schema({
   subscriptionType: {
     type: String,
     enum: ['Basic', 'Standard', 'Premium' ],
-  }
+  },
+  origin: String,
 }
 );
 
